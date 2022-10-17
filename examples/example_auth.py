@@ -9,6 +9,8 @@ if sys.platform == "win32":
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 # endregion
 
+CREDS = "USERNAME", "PASSWORD"
+
 async def inputMFACode() -> str:
     """
     asyncio version input
@@ -18,7 +20,6 @@ async def inputMFACode() -> str:
         return (await asyncio.get_event_loop().run_in_executor(e, input, mfaCode)).rstrip()
 
 async def main():
-    CREDS = "USERNAME", "PASSWORD"
     auth = riot_auth.RiotAuth()
     try:
         result = await auth.authorize(*CREDS)
@@ -41,17 +42,20 @@ async def main():
                 print(f"Entitlements Token: {auth.entitlements_token}\n")
                 print(f"User ID: {auth.user_id}")
 
-        await asyncio.sleep(5)
         
         # Reauth
+        await asyncio.sleep(5)
+        
         result = await auth.reauthorize()
-        print('Successfully Re-Authorized')
-        print(f"Access Token Type: {auth.token_type}\n")
-        print(f"Access Token: {auth.access_token}\n")
-        print(f"Entitlements Token: {auth.entitlements_token}\n")
-        print(f"User ID: {auth.user_id}")
+        if result == True:
+            print('Successfully Re-Authorized')
+            print(f"Access Token Type: {auth.token_type}\n")
+            print(f"Access Token: {auth.access_token}\n")
+            print(f"Entitlements Token: {auth.entitlements_token}\n")
+            print(f"User ID: {auth.user_id}")
 
     except Exception as e:
+        # Bad Error Handling
         print('Error')
         print(e)
 
