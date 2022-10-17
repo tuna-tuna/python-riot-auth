@@ -10,6 +10,8 @@ Currently HTTP/2 is not used as it does not appear to be an issue, ...and aiohtt
    - `$ pip install git+https://github.com/floxay/python-riot-auth.git`
  - This repository
    - `$ pip install git+https://github.com/tuna-tuna/python-riot-auth.git`
+   - I added MFA support which is not implemented to the original one, but keep in mind that it is WIP.
+     - Timeout, some specific errors, and so on are not implemented yet.
 
 ## Examples
  - Example(s) can be found in the examples folder.
