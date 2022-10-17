@@ -287,7 +287,7 @@ class RiotAuth:
                 if err is not None:
                     if err == "auth_failure":
                         raise RiotAuthenticationError(
-                            f"Failed to authenticate. Make sure username and password are correct. `{err}`."
+                            f"Failed to authenticate. Make sure mfa code is correct. `{err}`."
                         )
                     elif err == "rate_limited":
                         raise RiotRatelimitError()
